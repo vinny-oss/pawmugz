@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawMugz - Dog Mug Store Preview</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Murecho', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #121212;
+            background: #fff;
+            line-height: 1.6;
+        }
+
+        .page-width {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+            background: #fff;
+        }
+
+        .header-inner {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            grid-column: 2;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        nav { grid-column: 1; }
+        .header-actions { grid-column: 3; text-align: right; }
+
+        nav a, .header-actions a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #121212;
+            font-weight: 500;
+        }
+
+        nav a:hover { font-weight: 700; }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 60px 0;
+            align-items: center;
+        }
+
+        .hero-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            margin-bottom: 24px;
+            color: #555;
+        }
+
+        button, .button {
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 24px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+
+        button:hover, .button:hover {
+            background: #333;
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+            padding: 48px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .pill-link {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: #111;
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .pill-link:hover {
+            background: #000;
+        }
+
+        /* Grid Layouts */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .hero { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: #f3f3f3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        .card-content {
+            padding: 16px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .card-price {
+            font-size: 16px;
+            color: #666;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            max-width: 900px;
+            margin: 40px auto;
+            box-shadow: 0 6px 24px rgba(0,0,0,.06);
+        }
+
+        .newsletter h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .newsletter p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            min-width: 250px;
+            height: 46px;
+            padding: 0 20px;
+            border: 1px solid #ddd;
+            border-radius: 999px;
+            background: #fafafa;
+            outline: none;
+        }
+
+        .newsletter-form input:focus {
+            border-color: #111;
+            background: #fff;
+        }
+
+        .newsletter-form button {
+            height: 46px;
+        }
+
+        /* Footer */
+        footer {
+            background: #f3f3f3;
+            padding: 60px 0 40px;
+            margin-top: 60px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 16px;
+            font-size: 16px;
+        }
+
+        .footer-col a {
+            display: block;
+            color: #666;
+            text-decoration: none;
+            margin-bottom: 8px;
+        }
+
+        .footer-col a:hover {
+            color: #000;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #111;
+            color: #fff;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="page-width">
+            <div class="header-inner">
+                <nav>
+                    <a href="#breeds">Breeds</a>
+                    <a href="#themes">Themes</a>
+                </nav>
+                <div class="logo">🐾 PAWMUGZ</div>
+                <div class="header-actions">
+                    <a href="#search">Search</a>
+                    <a href="#cart">Cart (0)</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section - Pup Nado Collection -->
+    <section class="hero" style="background: linear-gradient(to bottom, #fff 0%, #f9f9f9 100%);">
+        <div class="page-width" style="display: contents;">
+            <div class="hero-image">
+                🌪️ Pup Nado Image
+            </div>
+            <div class="hero-content">
+                <h1>Pup Nado Collection</h1>
+                <p><strong>A tornado of pups, paws, and pure chaos.</strong></p>
+                <a href="#" class="button">Shop Pup-Nado Mugs 🌪️</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fan Faves Collection -->
+    <section>
+        <div class="page-width">
+            <div class="section-header">
+                <h2>Fan Faves</h2>
+                <a href="#" class="pill-link">Shop All</a>
+            </div>
+            <div class="grid-4">
+                <div class="card">
+                    <div class="card-image">🐕</div>
+                    <div class="card-content">
+                        <div class="card-title">Golden Retriever Mug</div>
+                        <div class="card-price">$24.99</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">🐶</div>
+                    <div class="card-content">
+                        <div class="card-title">Frenchie Mug</div>
+                        <div class="card-price">$24.99</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">🦮</div>
+                    <div class="card-content">
+                        <div class="card-title">Lab Mug</div>
+                        <div class="card-price">$24.99</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">🐕‍🦺</div>
+                    <div class="card-content">
+                        <div class="card-title">German Shepherd Mug</div>
+                        <div class="card-price">$24.99</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Breeds -->
+    <section style="background: #f9f9f9;">
+        <div class="page-width">
+            <div class="section-header">
+                <h2>Featured Breeds</h2>
+            </div>
+            <div class="grid-4">
+                <div class="card">
+                    <div class="card-image">🐕</div>
+                    <div class="card-content">
+                        <div class="card-title">French Bulldog →</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">🦮</div>
+                    <div class="card-content">
+                        <div class="card-title">Labrador Retriever →</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">🐕</div>
+                    <div class="card-content">
+                        <div class="card-title">Golden Retriever →</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">🐕‍🦺</div>
+                    <div class="card-content">
+                        <div class="card-title">German Shepherd →</div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 32px;">
+                <a href="#" class="button">All Breeds</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Themes -->
+    <section>
+        <div class="page-width">
+            <div class="section-header">
+                <h2>Featured Themes</h2>
+            </div>
+            <div class="grid-4">
+                <div class="card">
+                    <div class="card-image">🌪️</div>
+                    <div class="card-content">
+                        <div class="card-title">Pupnado →</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">☕</div>
+                    <div class="card-content">
+                        <div class="card-title">Coffee →</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">💪</div>
+                    <div class="card-content">
+                        <div class="card-title">Fitness →</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">❤️</div>
+                    <div class="card-content">
+                        <div class="card-title">Love →</div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 32px;">
+                <a href="#" class="button">All Themes</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Multi-Fur Section -->
+    <section class="hero" style="background: #fff;">
+        <div class="page-width" style="display: contents;">
+            <div class="hero-content" style="order: 2;">
+                <h1 style="font-size: 36px;">Multi-Fur Across Designs</h1>
+                <p>Choose the design you love, then select the fur colour.</p>
+                <a href="#" class="button">Explore All Mugs</a>
+            </div>
+            <div class="hero-image" style="order: 1; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                🎨 Multi-Fur Image
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section>
+        <div class="page-width">
+            <div class="newsletter">
+                <h3>Stay in the loop</h3>
+                <p>Fresh drops, limited runs, and secret discounts. 🐾</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email" required>
+                    <button type="submit">Sign Up</button>
+                </form>
+                <p style="margin-top: 12px; font-size: 13px; color: #666;">Join for 10% off your first mug + updates.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="page-width">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Shop</h4>
+                    <a href="#">All Mugs</a>
+                    <a href="#">Best Sellers</a>
+                    <a href="#">New Arrivals</a>
+                    <a href="#">Gift Cards</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Breeds</h4>
+                    <a href="#">Bulldog</a>
+                    <a href="#">Corgi</a>
+                    <a href="#">French Bulldog</a>
+                    <a href="#">Golden Retriever</a>
+                    <a href="#">View All Breeds →</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Themes</h4>
+                    <a href="#">Coffee Pups</a>
+                    <a href="#">Fitness Pups</a>
+                    <a href="#">Pupnado</a>
+                    <a href="#">Love Collection</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Help</h4>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Shipping Info</a>
+                    <a href="#">Returns</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 PawMugz. All rights reserved. 🐾</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
